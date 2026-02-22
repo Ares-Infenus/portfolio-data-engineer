@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg: #000000;
+  --color-surface: #0a0a0a;
+  --color-border: #1a1a1a;
+  --color-emerald-power: #007a5a;
+  --color-text-main: #e6e6e6;
+  --color-text-muted: #666666; /* Un poco más claro para que se lea */
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --cursor-x: 0px;
+  --cursor-y: 0px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  /* Eliminamos cursor:none por ahora para que no pierdas el control mientras desarrollas */
+  overflow-x: hidden;
+}
+
+/* Spotlight más visible pero elegante */
+.obsidian-spotlight {
+  background: radial-gradient(
+    800px circle at var(--cursor-x) var(--cursor-y),
+    rgba(0, 122, 90, 0.08),
+    transparent 60%
+  );
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Corregimos el solapamiento de letras gigantes */
+.text-giant {
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 1.1; /* Subimos de 0.8 para evitar que choquen */
+  letter-spacing: -0.02em;
+  font-weight: 900;
+  text-transform: uppercase;
+  opacity: 0.03; /* Casi invisible, es un detalle de fondo, no el protagonista */
 }
